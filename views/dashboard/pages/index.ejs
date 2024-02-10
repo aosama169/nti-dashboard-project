@@ -1,10 +1,12 @@
-<%- include('../partials/headerLayout.ejs', {pageTitle: "Dishes Page", pathLevel: ""}) %>
+<%- include('../partials/headerLayout.ejs', {pageName: "DashBoard", pageTitle: "DashBoard", pathLevel: "/../"}) %>
 
 <!-- Blank Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
         <div class="col-md-6 text-center">
-            <h3>This is blank page</h3>
+            <h1>This is my Dashboard page</h1>
+            <br/><br/>
+            <span><h3>Select a section from the left list to start!</h3></span>
         </div>
     </div>
 </div>
@@ -14,4 +16,4 @@
 
 
 
-<%- include('../partials/footerLayout.ejs') %>
+<%- include('../partials/footerLayout.ejs',{pathLevel: "/"}) %>
