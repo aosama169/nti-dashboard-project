@@ -6,6 +6,7 @@ const app = express();
 
 const bannerController = require('../controllers/dashboard/bannerController');
 const contactformController = require('../controllers/dashboard/contactformController');
+const ourWorkController = require('../controllers/dashboard/ourWorkController');
 
 /* -------------- parse of form ------------------- */
 app.use(express.json());
@@ -33,8 +34,8 @@ const upload = multer({
 });
 
 
-/* ---------------------------------------------------- */
-/* -------------- route roles ------------------------ */
+/* ------------------------------------------------------ */
+/* --------------------- route roles -------------------- */
 /* ------------------------------------------------------ */
 const authController = require("../controllers/dashboard/authController");
 
@@ -87,6 +88,18 @@ dashboardRouter.get('/dashboard/contactform/show/:id', (req, res) => {
 });
 dashboardRouter.get('/dashboard/contactform/destroy/:id', (req, res) => {
     contactformController.destroy(req, res);
+});
+
+/* ---------------Our Work---------------- */
+
+dashboardRouter.get('/dashboard/ourWork', (req, res) => {
+    ourWorkController.index(req, res);
+});
+dashboardRouter.get('/dashboard/ourWork/show/:id', (req, res) => {
+    ourWorkController.show(req, res);
+});
+dashboardRouter.get('/dashboard/ourWork/destroy/:id', (req, res) => {
+    ourWorkController.destroy(req, res);
 });
 
 
