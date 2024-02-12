@@ -1,0 +1,32 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "ourProjects", pageTitle: "Banner Page", pathLevel: "/"}) %>
+
+<h3>
+    <a href="/dashboard/ourProjects">back</a>
+</h3>
+
+
+<%if(oneMessage.length > 0) {%>
+    <table border width="100%">
+        <tr>
+            <th>fullName</th>
+            <th><%= oneMessage[0].title %></th>
+            
+        </tr>
+        <tr>
+            <th>subject</th>
+            <th><%= oneMessage[0].description %></th>
+            
+        </tr>
+        <tr>
+            <th>Photo</th>
+            <th><img src="/uploads/<%=oneMessage[0].photo%>" width="250" alt=""></th>
+        </tr>
+        
+    </table>
+<%}
+else {%>
+    <h3>No message with this information !!!</h3>
+<%}%>
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

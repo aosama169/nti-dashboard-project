@@ -7,6 +7,7 @@ const app = express();
 const bannerController = require('../controllers/dashboard/bannerController');
 const contactformController = require('../controllers/dashboard/contactformController');
 const ourWorkController = require('../controllers/dashboard/ourWorkController');
+const ourProjectsController = require('../controllers/dashboard/ourProjectsController');
 
 /* -------------- parse of form ------------------- */
 app.use(express.json());
@@ -102,5 +103,16 @@ dashboardRouter.get('/dashboard/ourWork/addProject/:cat/:project', (req, res) =>
     ourWorkController.addProject(req, res);
 });
 
+/* ---------------Our Projects---------------- */
+
+dashboardRouter.get('/dashboard/ourProjects', (req, res) => {
+    ourProjectsController.index(req, res);
+});
+dashboardRouter.get('/dashboard/ourProjects/show/:id', (req, res) => {
+    ourProjectsController.show(req, res);
+});
+// dashboardRouter.get('/dashboard/ourProjects/addProject/:cat/:project', (req, res) => {
+//     ourProjectsController.addProject(req, res);
+// });
 
 module.exports = dashboardRouter;
