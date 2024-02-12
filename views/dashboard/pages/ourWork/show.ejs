@@ -6,33 +6,42 @@
 
 
 <%if(oneMessage.length > 0) {%>
-    <table border width="100%">
-        <tr>
-            <th>fullName</th>
-            <th><%= oneMessage[0].fullName %></th>
-            
-        </tr>
-        <tr>
-            <th>subject</th>
-            <th><%= oneMessage[0].subject %></th>
-            
-        </tr>
-        <tr>
-            <th>email</th>
-            <th><%= oneMessage[0].email %></th>
-        </tr>
-        <tr>
-            <th>Message</th>
-            <th>
-                <%= oneMessage[0].message %> 
-            </th>
-        </tr>
-        
-    </table>
+    <br />
+    <br />
+    <h3>Category: <%= oneMessage[0].catName %></h3>
+    <br />
+    <br />
+
+    <h4 style="color: #1a72a8;">Choose a Project to Add :></h4>
+
+    <select id="myCombo" style="width: 100px; font-size: medium;">
+        <% for(let i = 0; i < projects.length; i++) { %>
+          <option value="<%= projects[i].id %>"><%= projects[i].title %></option>
+        <% } %>
+    </select>
+    
+    <br />
+
+    <button type="button" style="margin-top: 50px; font-size: medium; background-color: #0ba245;" onclick="addProject('<%= oneMessage[0].id %>')">Add Project</button>
+
+
 <%}
 else {%>
     <h3>No message with this information !!!</h3>
 <%}%>
 
+
+<script>
+    function addProject(cat){
+        if(confirm("Are You Sure you want to Add this Project ?")) {
+            var project = document.getElementById('myCombo').value;
+            if(project != null && project != "" && project != undefined){
+                window.location.replace("/dashboard/ourWork/addProject/" + cat + "/"+project);
+            }else{
+                alert("Please Choose a project!");
+            }
+        }        
+    }
+</script>
 
 <%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

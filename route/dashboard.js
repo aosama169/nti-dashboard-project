@@ -98,8 +98,8 @@ dashboardRouter.get('/dashboard/ourWork', (req, res) => {
 dashboardRouter.get('/dashboard/ourWork/show/:id', (req, res) => {
     ourWorkController.show(req, res);
 });
-dashboardRouter.get('/dashboard/ourWork/destroy/:id', (req, res) => {
-    ourWorkController.destroy(req, res);
+dashboardRouter.get('/dashboard/ourWork/addProject/:cat/:project', (req, res) => {
+    ourWorkController.addProject(req, res);
 });
 
 

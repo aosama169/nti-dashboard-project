@@ -6,16 +6,10 @@
 <%if(messages.length > 0){%>
     <table border style="width: 100%">
         <tr>
-            <th>Slide Title</th><th>Details</th><th>Operations</th>
+            <th>Category Name</th><th/>
         </tr>    
         <% messages.forEach((oneMessage) => { %>
-            <%if(oneMessage.isRead == 0) {%>
-                <tr style="color: blue; font-weight: bolder !important; font-size: 20px;">
-            <%} else {%>
-                <tr style="color: gray; font-weight: normal !important; font-size: 20px;">
-            <%}%>
-                <th><%= oneMessage.fullName %></th>
-                <th><%= oneMessage.subject %></th>
+                <th><%= oneMessage.catName %></th>
                 <th>
                     <a href="/dashboard/ourWork/show/<%=oneMessage.id%>">
                         Details
@@ -23,18 +17,18 @@
                                       
                     &nbsp;&nbsp;&nbsp;
                     
-                    <span onclick="destroy(this);" productID="<%=oneMessage.id%>" style="cursor: pointer;">
+                    <!-- <span onclick="destroy(this);" productID="<%=oneMessage.id%>" style="cursor: pointer;">
                         Delete
-                    </span>
+                    </span> -->
                 </th>
             </tr>
         <% }); %>
     </table>
 <%}
 else {%>
-    <h3>No products created yet !!!!</h3>
+    <h3>No Categories created yet !!!!</h3>
 <%}%>
-
+<!-- 
 <script>
     function destroy(obj){
         if(confirm("Are You Sure you want to Delete this Product ?")) {
@@ -42,6 +36,6 @@ else {%>
             window.location.replace("/dashboard/ourWork/destroy/" + id);
         }        
     }
-</script>
+</script> -->
 
 <%- include('../../partials/footerLayout.ejs', { pathLevel: "/" }) %>

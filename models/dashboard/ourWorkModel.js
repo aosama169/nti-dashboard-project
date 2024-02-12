@@ -9,7 +9,7 @@ const connection = mysql.createPool({
 
 async function index() {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM contactform ORDER BY id DESC", [], (error, result) => {
+        connection.query("SELECT * FROM workcat", [], (error, result) => {
             if(!error) {
                 resolve(result);
             }
@@ -19,7 +19,7 @@ async function index() {
 
 async function show(id) {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM contactform WHERE id=?", [id], (error, result) => {
+        connection.query("SELECT * FROM workcat WHERE id=?", [id], (error, result) => {
             if(!error) {
                 resolve(result);
             }
@@ -27,29 +27,41 @@ async function show(id) {
     });
 }
 
-async function markAsRead(id) {
+async function getProjects(id) {
     return new Promise((resolve, reject) => {
-        connection.query("UPDATE contactform SET isRead=? WHERE id=?", [1, id], (error, result) => {
-            if (error) {
-                return res.json({ err: error });
+        connection.query("select workproj.id, workproj.title from workproj WHERE workproj.id NOT IN (SELECT workcatproj.projId FROM  workcatproj  where workcatproj.catId = ? ) ", [id], (error, result) => {
+            if(!error) {
+                resolve(result);
             }
         })
     });
 }
 
-async function destroy(id) {
+async function addProjects(cat, project) {
     return new Promise((resolve, reject) => {
-        connection.query("DELETE FROM contactform WHERE id=?", [id], (error, result) => {
-            if(error) {
-                return res.json({ err: error});
+        connection.query("INSERT INTO workcatproj (catId, projId) VALUES (?,?)", [cat, project], (error, result) => {
+            if(!error) {
+                resolve(result);
+            }else{
+                reject(error);
             }
         })
     });
 }
+
+// async function destroy(id) {
+//     return new Promise((resolve, reject) => {
+//         connection.query("DELETE FROM workcat WHERE id=?", [id], (error, result) => {
+//             if(error) {
+//                 return res.json({ err: error});
+//             }
+//         })
+//     });
+// }
 
 module.exports = {
     index,
     show,
-    markAsRead,
-    destroy
+    getProjects,
+    addProjects
 }
